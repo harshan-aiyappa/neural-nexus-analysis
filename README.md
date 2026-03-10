@@ -15,6 +15,8 @@ Documents comparing the current architecture against Neo4j reference PDFs and de
 - **[Neo4j & Folder Architecture](file:///d:/01_Projects/OpenSource/neural-nexus/analysis/research/neo4j_and_folder_architecture.md)**: End-to-end explanation of database and folder scoping.
 - **[DB Architecture Best Practices](file:///d:/01_Projects/OpenSource/neural-nexus/analysis/research/db_architecture_best_practices.md)**: Comparison of Single vs. Multi-DB for Neo4j.
 - **[System Infographics](file:///d:/01_Projects/OpenSource/neural-nexus/analysis/research/system_infographics.md)**: Visual breakdown of architecture, data flow, and tech stack (HD).
+- **[Project Master Overview](file:///d:/01_Projects/OpenSource/neural-nexus/analysis/research/project_master_overview.md)**: End-to-end master plan and structure of the existing `neural-nexus` ecosystem.
+- **[Functional Flows & Features](file:///d:/01_Projects/OpenSource/neural-nexus/analysis/research/functional_flows_and_features.md)**: Detailed step-by-step technical breakdown of every major platform feature.
 - **[Future Research & Studies](file:///d:/01_Projects/OpenSource/neural-nexus/analysis/research/further_research_and_studies.md)**: Strategic roadmap for ontology, scale, and compliance studies.
 - **[Critical Failure Analysis](file:///d:/01_Projects/OpenSource/neural-nexus/analysis/research/critical_failure_analysis.md)**: Brutally honest audit of where and why the system fails.
 - **[Product Visual Roadmap](file:///d:/01_Projects/OpenSource/neural-nexus/analysis/research/product_visual_roadmap.md)**: High-definition matrix of capabilities, problems, and pros/cons.
