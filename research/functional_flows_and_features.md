@@ -33,16 +33,33 @@ This document breaks down every major feature and functional flow currently pres
 
 ---
 
-## 4. Feature: 3D Visualization & Interaction
-**Objective**: Visually represent complex biological connections.
+## 4. Feature: Visualization Engine (2D/3D & Interaction)
+**Objective**: Visually represent complex biological connections in real-time.
 *   **Step 1: Data Fetch**: The frontend fetches a clustered subset of the Neo4j graph data.
-*   **Step 2: Force-Directed Layout**: React-Three-Fiber processes the nodes and edges, using physics (repulsion/attraction) to space out clusters naturally.
-*   **Step 3: Metadata Hover**: The user clicks a 3D sphere. The frontend pulls the underlying Neo4j properties (e.g., entity type, description) and displays it in a side panel.
+*   **Step 2: 2D/3D Toggle Strategy**: 
+    *   **3D Mode**: Uses `react-three-fiber` and `d3-force-3d` for immersive, physics-based spatial exploration.
+    *   **2D Mode**: Uses standard 2D physics for clearer, flat hierarchy mapping and readability.
+*   **Step 3: Graph Controls (UI)**: The `GraphContainer` components allow zooming, panning, pausing physics, and highlighting specific nodes.
+*   **Step 4: Metadata Panels**: The user clicks a node (e.g., a specific chemical). The frontend pulls the underlying Neo4j properties and opens the `EntityInfoPanel` or `AnalyticsPanel` on the side.
 
 ---
 
-## 5. Feature: Logical "Folder" Workspaces
+## 5. Feature: Advanced UI Tooling (Editor, Compare, Export)
+**Objective**: Provide professional-grade workspace tools for researchers.
+*   **Command Palette (⌘K)**: A globally accessible quick-search bar allowing users to jump directly to specific herbs, chemicals, or UI actions without manual navigation.
+*   **Graph Comparison Tool**: Allows users to load two different subgraph projections side-by-side to visually identify differences in relationships or community clusters.
+*   **Node/Schema Editor**: A manual UI tool allowing authorized users to create, delete, or modify nodes and relationship edges directly from the visualization space.
+*   **Data Export**: Users can serialize their current view (or specific GDS results) and export it to JSON or CSV for use in external analytical tools.
+
+---
+
+## 6. Feature: Logical "Folder" Workspaces
 **Objective**: Keep multi-tenant or multi-project data isolated in one physical database.
 *   **Step 1: Session Creation**: A new folder record is created in PostgreSQL.
 *   **Step 2: Tagging**: All subsequent Neo4j ingestions append the `folder_id` property.
 *   **Step 3: Filtering**: Every analytical read operation or LLM context retrieval includes `WHERE n.folder_id = 'XYZ'`. *(Note: Pending upgrade to Native Labels for enhanced performance).*
+
+---
+
+## Technical Appendix: How It All Connects Today
+Currently, the **Frontend (React)** is the "Controller," heavily relying on the **Backend (FastAPI)** to orchestrate heavy lifting. When a user clicks "Run PageRank" via the UI `Algorithm Picker`, the frontend sends a REST request to FastAPI. FastAPI uses the `folder_id` to generate an in-memory graph projection on **Neo4j GDS**, runs the math, and returns the top 10 nodes to FastAPI, which then forwards them to the React frontend for visual highlighting (e.g., turning those specific 3D spheres bright red).
